@@ -3,9 +3,10 @@ from app import app, db, admin
 from flask_admin.contrib.sqla import ModelView
 # from app import app
 from . import db, models
-from .forms import AddToBasket, RemoveFromBasket, LoginForm, SingupForm, ChangePassword, GoToOrders, PlaceOrder
+from .forms import AddToBasket, RemoveFromBasket, LoginForm, SingupForm, ChangePassword
 from .models import Product, User, Order, NumProduct
 from collections import Counter
+import logging
 
 # add admin to allow easier editing of the DB
 admin.add_view(ModelView(Product, db.session))
@@ -30,13 +31,16 @@ def entry():
         given_pass = form1.password.data
         query = User.query.filter_by(email=given_email).first()
         if query is None:
+            app.logger.error('unsuccessful login attempt')
             message = str("Username: " + given_email + " does not exist")
         else:
             if query.verify_password(given_pass):
                 session['user'] = query.id
                 session['newUser'] = True
+                app.logger.warning('%s: logged in successfully', query.name)
                 return redirect(url_for('index'))
             else:
+                app.logger.error('%s: attempted login with incorrect password', query.name)
                 message = str("Incorrect password for user: " + given_email)
 
     # handle signup form
@@ -47,6 +51,7 @@ def entry():
         given_pass = form2.password.data
         # add new record with given data
         newUser = User(given_email, given_name, given_pass)
+        app.logger.warning('%s :created account', newUser.name)
         message = str("Account Created! - Now please log in...")
         db.session.add(newUser)
         db.session.commit()
@@ -57,6 +62,9 @@ def entry():
 
 @app.route('/logout', )
 def logout():
+    sessionId = session.get('user')
+    user = User.query.filter_by(id=sessionId).first()
+    app.logger.warning('%s: logged out', user.name)
     session.pop('user', None)
     session.pop('basket', None)
     return redirect(url_for('entry'))
@@ -85,7 +93,9 @@ def change():
             user.update_password(given_newpass)
             db.session.commit()
             alertStatus = 1
+            app.logger.warning('%s: successful password update', user.name)
         else:
+            app.logger.error('%s: successful password update', user.name)
             alertStatus = 0
 
         return render_template('changepass.html', title='Change Password', form=form, User=user.name, alert=alertStatus)
@@ -124,6 +134,7 @@ def index():
         product = request.form.get('basketer')
         basketArr.append(product)
         session['basket'] = basketArr
+        app.logger.warning('%s: added item to basket', user.name)
 
     return render_template('index.html', title='Homepage', data=data, form=form, images=images, User=user.name, alert=alert)
 
@@ -159,10 +170,13 @@ def basket():
             basketArr.remove(product)
         except ValueError:
             print("Error: trying to remove product not in basket")
+            app.logger.error('%s: Error tried to remove item not in basket', user.name)
+
         basketArr.sort()
         session['basket'] = basketArr
         # update basket and data
         fillDatafromBasket(basketArr)
+        app.logger.warning('%s: removed item from basket', user.name)
         return redirect(url_for('basket'))
 
     # go to users orders
@@ -188,6 +202,7 @@ def basket():
             data = []
             alert = 1
             canOrder = False
+            app.logger.warning('%s: placed an order', user.name)
             return render_template('basket.html', title='Basket', data=data, total=basketSummary(data),
                                    User=user.name, alert=alert, canOrder=canOrder)
         else:

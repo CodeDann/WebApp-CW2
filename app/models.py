@@ -32,7 +32,7 @@ class Product(db.Model):
     product_thumbnail = db.Column(db.String(10))
     price = db.Column(db.Float)
     available = db.Column(db.Integer)
-    inOrder = relationship("NumProduct")
+    # inOrder = relationship("NumProduct")
 
     def __init__(self, title, product_code, product_thumbnail, price, available):
         self.title = title
