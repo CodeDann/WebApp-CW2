@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf%}
+
+{% block content %}
+<!-- Title -->
+<div class="container-fluid jumbotron">
+<h1 class="display-4"> Store information </h1>
+    <div id="information">
+        <hr class="my-4">
+        <h1 class="lead"> Welcome to Jake's Coffee Store. This is an example of a e-commerce website dedicated to selling coffee </h1>
+        <p> This site was developed for educational purposes. It was developed for COMP2011 "Web Application Development" </p>
+        <p> All images used were taken by Jake Noar </p>
+        <p> All fonts used are dyslexic friendly and please use the button below to read all the information from this page out loud </p>
+    </div>
+    <button type="button" class="btn btn-outline-primary speaker lead"> Speak the information </button>
+</div>
+
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf%}
+
+{% block content %}
+<!-- Title -->
+
+
+<div class="container-fluid jumbotron">
+    <h1 class="display-4"> Change your password </h1>
+    <hr class="my-4">
+    <div id="div_to_hide">
+        {% if( alert == 0) %}
+        <div class="alert alert-danger alert-dismissible fade show">
+            Old password was incorrect - Password not updated!
+            <button type="button" class="close" aria-hidden="true"> &times; </button>
+        </div>
+        {% elif( alert == 1) %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            Password successfully updated
+            <button type="button" class="close"> <span >&times;</span> </button>
+        </div>
+        {% endif %}
+    </div>
+    <div id="form">
+      <form action="" method="post" name="changepass">
+          {{ form.csrf_token }}
+          {{ wtf.form_field(form.oldpassword) }}
+          {{ wtf.form_field(form.password) }}
+          {{ wtf.form_field(form.passwordCheck) }}
+          <button type="button" class="btn btn-outline-primary"> {{ wtf.form_field(form.submit) }} </button>
+      </form>
+    </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf%}
+
+
+{% block content %}
+<!-- Title -->
+<div class="container-fluid jumbotron">
+    <h1 class="display-4"> {{User}}'s Basket </h1>
+    <hr class="my-4">
+
+
+<div class="container">
+        {% if( alert == 1) %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            Order successfully placed - view it in your orders!
+            <button type="button" class="close"> <span >&times;</span> </button>
+        </div>
+        {% elif( alert == 2) %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            Error: Please add items to your basket before ordering
+            <button type="button" class="close"> <span >&times;</span> </button>
+        </div>
+        {% endif %}
+        {% for item in data %}
+        <!-- Display Products -->
+            <div class="card text-white bg-dark mb-3 w-75">
+                <div class="card-body row">
+                        <div class="col-sm">
+                            <h4 class="card-title">{{ item[0].title }}</h4>
+                            <p class="card-text">Price: {{ item[0].price }} </p>
+                        </div>
+                        <div class="col-sm text-center">
+                            <p class="card-text">Quantity: {{ item[1] }} </p>
+                            <form action="" method="post">
+                                <button name="remover" class="btn btn-outline-danger" type="submit" value={{item[0].product_code}}>
+                                    Remove one from basket </button>
+                            </form>
+                        </div>
+              </div>
+          </div>
+        {% endfor %}
+        <br>
+        <div class="card bg-light mb-3 w-75">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm">
+                            <h4 class="card-title">Order Subtotal: £{{total}} </h4>
+                        </div>
+                        <div class="col-sm text-center">
+                            {% if canOrder %}
+                            <form action="" method="post">
+                                <button name="placeOrder" class="btn btn-lg btn-outline-success" type="submit">
+                                    Place Order </button>
+                            </form>
+                            {% else %}
+                            <form action="" method="post">
+                                <button name="gotoorders" class="btn btn-lg btn-outline-primary" type="submit">
+                                    Go to my orders </button>
+                            </form>
+                            {% endif %}
+                        </div>
+                    </div>
+              </div>
+    </div>
+    </div>
+</div>
+{% endblock %}

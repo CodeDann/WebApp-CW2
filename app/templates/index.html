@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Title -->
+<div class="container-fluid jumbotron">
+    {% if( alert == 1) %}
+        <div class="alert alert-warning" role="alert">
+        You have agreed to cookies and our privacy policy. All data is stored securely and will
+            never be used for marketing purposes. Cookies are only used to improve your experience while on the site
+        </div>
+    {% endif %}
+    <h1 class="display-4"> Scroll through our gorgeous array of beans </h1>
+    <hr class="my-4">
+<div class="container" id="cardcontainer">
+{% for item in data %}
+<!-- Display Products -->
+{% if ((loop.index+2) %3 == 0) %}
+    <div class="row">
+{% endif %}
+    <div class="card text-white bg-dark mb-3">
+        <img class="card-img-top" src="{{images[loop.index-1]}}"  alt="Card image">
+      <div class="card-body">
+        <h4 class="card-title text-center">{{ item.title }}</h4>
+        <p class="card-text">{{ item.description }}</p>
+        <p class="card-text">Price: {{ item.price }} </p>
+        <div class="text-center">
+        {% if( item.available == 1) %}
+            <form action="" method="post">
+                <button type="submit" name="basketer"  class="btn btn-outline-success" value={{item.product_code}}> Add to basket </button>
+            </form>
+        {% else %}
+            <form action="" method="post">
+              <button type="button"  class="btn btn-outline-danger" disabled> Item Unavailable </button>
+            </form>
+        {% endif %}
+        </div>
+      </div>
+    </div>
+{% if ((loop.index+3) %3 == 0) %}
+</div> <!-- row -->
+{% endif %}
+<br>
+{% endfor %}
+</div>
+
+</div>
+{% endblock %}

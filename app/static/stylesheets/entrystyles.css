@@ -1,0 +1,25 @@
+*, body
+{
+    font-family: 'Verdana', sans-serif;
+    background-color: #152733;
+    color: white;
+}
+
+.container{
+    margin-top: 15%;
+    padding: 15px 15px 15px 15px;
+}
+
+#submit{
+    color: white;
+    border: 1px solid white;
+    border-radius: 5px;
+}
+
+#entryform{
+    background: none;
+}
+
+hr{
+    background-color: #fff;
+}

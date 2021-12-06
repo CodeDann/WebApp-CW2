@@ -1,0 +1,35 @@
+*, body
+{
+    font-family: 'Verdana', sans-serif;
+
+}
+
+#cardcontainer{
+    margin-left: auto;
+}
+
+.card{
+    margin: 25px 25px 25px 25px;
+    width: 28%;
+}
+
+#card-buttons{
+    margin: 0px 0px 25px 25px;
+}
+
+.rightborder{
+    border-right: 10px;
+    border-color: #343a40;
+}
+
+#spyHere{
+    position: relative;
+}
+
+#myScroller{
+    position: fixed;
+}
+
+.starthidden{
+    display: none;
+}

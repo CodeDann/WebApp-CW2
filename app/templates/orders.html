@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Title -->
+<div class="container-fluid jumbotron">
+    <h1 class="display-4"> {{User}}'s Orders </h1>
+    <hr class="my-4">
+    <div class="dropdown">
+          <button class="btn btn-primary btn-lg dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Choose an order
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            {% for order in data %}
+                <a class="dropdown-item" onclick="showOrder('section-{{order.id}}')">Order# {{order.id}}</a>
+            {% endfor %}
+          </div>
+    </div>
+        {% for order in data %}
+            <!-- Display Orders -->
+                <div class="card bg-light border-dark mb-3 w-75 starthidden" id="section-{{order.id}}">
+                    <h4 class="card-header">Order No: {{ order.id }}</h4>
+                    {% for orderdeets in order.contents %}
+                    <div class="card-body row">
+                        <div class="col-sm">
+                            <p class="card-text">Product: {{ orderdeets.product.title }} </p>
+                        </div>
+                        <div class="col-sm">
+                            <p class="card-text">Quantity: {{ orderdeets.quantity }} </p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <div class="card-footer text-primary">Order Total: {{ order.price }}</div>
+              </div>
+        {% endfor %}
+</div>
+{% endblock %}
