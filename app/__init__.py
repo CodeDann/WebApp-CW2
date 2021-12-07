@@ -15,7 +15,7 @@ admin = Admin(app, template_mode='bootstrap3')
 # remove any unwanted handlers
 for handler in logging.root.handlers[:]:
     logging.root.removeHandler(handler)
-logging.basicConfig(filename='../CW2/logging/logger.log', level=logging.INFO, format='%(asctime)s %(levelname)s: %(message)s')
+logging.basicConfig(filename='../logging/logger.log', level=logging.INFO, format='%(asctime)s %(levelname)s: %(message)s')
 
 
 migrate = Migrate(app, db)
