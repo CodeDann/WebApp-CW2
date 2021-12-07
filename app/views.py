@@ -40,7 +40,7 @@ def entry():
                 return redirect(url_for('index'))
             else:
                 app.logger.error('%s: attempted login with incorrect password', query.name)
-                message = str("Incorrect password for" + given_email + ": If you've forgotten it please create a new account")
+                message = str("Incorrect password for " + given_email + ": If you've forgotten it please create a new account")
 
     # handle signup form
     if form2.validate_on_submit():
