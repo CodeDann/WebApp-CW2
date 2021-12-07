@@ -21,14 +21,14 @@ class GoToOrders(FlaskForm):
 
 
 class ChangePassword(FlaskForm):
-    oldpassword = PasswordField("Old Password", validators=[DataRequired()])
+    oldpassword = PasswordField("Current Password", validators=[DataRequired()])
     password = PasswordField("New Password", validators=[DataRequired(), EqualTo('passwordCheck', message='Passwords must be the same')])
     passwordCheck = PasswordField("Re-Enter Password", validators=[DataRequired()])
     submit = SubmitField('Change Password')
 
 
 class ChangeName(FlaskForm):
-    oldname = StringField("Old Name", validators=[DataRequired()])
+    oldname = StringField("Current Name", validators=[DataRequired()])
     newname = StringField("New Name", validators=[DataRequired(), EqualTo('namecheck', message='Names must be the same')])
     namecheck = StringField("Re-Enter Name", validators=[DataRequired()])
     submit = SubmitField('Change Name')
