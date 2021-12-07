@@ -27,7 +27,7 @@ def entry():
 
     # handle login form
     if form1.validate_on_submit():
-        given_email = form1.email.data
+        given_email = form1.email.data.lower()
         given_pass = form1.password.data
         query = User.query.filter_by(email=given_email).first()
         if query is None:
@@ -44,7 +44,7 @@ def entry():
 
     # handle signup form
     if form2.validate_on_submit():
-        given_email = form2.email.data
+        given_email = form2.email.data.lower()
         given_name = form2.name.data
         given_pass = form2.password.data
         # add new record with given data
