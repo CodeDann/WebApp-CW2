@@ -3,12 +3,6 @@
 {% block content %}
 <!-- Title -->
 <div class="container-fluid jumbotron">
-    {% if( alert == 1) %}
-        <div class="alert alert-warning" role="alert">
-        You have agreed to cookies and our privacy policy. All data is stored securely and will
-            never be used for marketing purposes. Cookies are only used to improve your experience while on the site
-        </div>
-    {% endif %}
     <h1 class="display-4"> Scroll through our gorgeous array of beans </h1>
     <hr class="my-4">
 <div class="container" id="cardcontainer">
@@ -22,7 +16,7 @@
       <div class="card-body">
         <h4 class="card-title text-center">{{ item.title }}</h4>
         <p class="card-text" id="remove">{{ item.description }}</p>
-        <p class="card-text">Price: {{ item.price }} </p>
+        <p class="card-text">Price: £{{ item.price }} </p>
         <div class="text-center">
         {% if( item.available == 1) %}
             <form action="" method="post">
@@ -30,7 +24,7 @@
             </form>
         {% else %}
             <form action="" method="post">
-              <button type="button"  class="btn btn-outline-danger" disabled> Out of Stock </button>
+              <button type="button"  class="btn btn-outline-danger" disabled> Out of Stock  </button>
             </form>
         {% endif %}
         </div>

@@ -27,11 +27,17 @@ class ChangePassword(FlaskForm):
     submit = SubmitField('Change Password')
 
 
+class ChangeName(FlaskForm):
+    oldname = StringField("Old Name", validators=[DataRequired()])
+    newname = StringField("New Name", validators=[DataRequired(), EqualTo('namecheck', message='Names must be the same')])
+    namecheck = StringField("Re-Enter Name", validators=[DataRequired()])
+    submit = SubmitField('Change Name')
+
+
 class LoginForm(FlaskForm):
     email = StringField("Email", validators=[DataRequired(), Email()])
     password = PasswordField("Password", validators=[DataRequired()])
-    cookie_consent = BooleanField("Click here to consent to cookies", validators=[DataRequired(message="Cookies are "
-                                            "essential to this website functioning properly, please give consent")])
+    cookie_consent = BooleanField("Click here to consent to essential cookies", validators=[DataRequired()])
     submit = SubmitField("Login")
 
 

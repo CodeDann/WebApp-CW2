@@ -3,7 +3,7 @@ from app import app, db, admin
 from flask_admin.contrib.sqla import ModelView
 # from app import app
 from . import db, models
-from .forms import AddToBasket, RemoveFromBasket, LoginForm, SingupForm, ChangePassword
+from .forms import AddToBasket, RemoveFromBasket, LoginForm, SingupForm, ChangePassword, ChangeName
 from .models import Product, User, Order, NumProduct
 from collections import Counter
 import logging
@@ -36,16 +36,14 @@ def entry():
         else:
             if query.verify_password(given_pass):
                 session['user'] = query.id
-                session['newUser'] = True
                 app.logger.warning('%s: logged in successfully', query.name)
                 return redirect(url_for('index'))
             else:
                 app.logger.error('%s: attempted login with incorrect password', query.name)
-                message = str("Incorrect password for user: " + given_email)
+                message = str("Incorrect password for user: If youve forgotten it please create a new account" + given_email)
 
     # handle signup form
     if form2.validate_on_submit():
-        # TODO if unsuccessful form submit slider defaults back to login - CHANGE THIS
         given_email = form2.email.data
         given_name = form2.name.data
         given_pass = form2.password.data
@@ -78,16 +76,17 @@ def storeinfo():
 
 @app.route('/changepass', methods=['GET', 'POST'])
 def change():
-    form = ChangePassword()
+    form1 = ChangePassword()
+    form2 = ChangeName()
     sessionId = session.get('user')
     user = User.query.filter_by(id=sessionId).first()
 
-    alertStatus = 2
+    alertStatus = None
     # update password
-    if form.validate_on_submit():
+    if form1.validate_on_submit():
         # get info from form
-        given_oldpass = form.oldpassword.data
-        given_newpass = form.password.data
+        given_oldpass = form1.oldpassword.data
+        given_newpass = form1.password.data
         # check its correct and update if so
         if user.verify_password(given_oldpass):
             user.update_password(given_newpass)
@@ -98,20 +97,30 @@ def change():
             app.logger.error('%s: successful password update', user.name)
             alertStatus = 0
 
-        return render_template('changepass.html', title='Change Password', form=form, User=user.name, alert=alertStatus)
+        return render_template('changepass.html', title='Change Password', form=form1, form2=form2, User=user.name, alert=alertStatus)
 
-    return render_template('changepass.html', title='Change Password', form=form, User=user.name, alert=alertStatus)
+    elif form2.validate_on_submit():
+        given_oldname = form2.oldname.data
+        given_newname = form2.newname.data
+        # check its correct and update if so
+        if user.name == given_oldname:
+            user.name = given_newname
+            db.session.commit()
+            alertStatus = 2
+            app.logger.warning('%s: successful name update', user.name)
+        else:
+            app.logger.error('%s: unsuccessful name update', user.name)
+            alertStatus = 3
+
+        return render_template('changepass.html', title='Change Password', form1=form1, form2=form2, User=user.name, alert=alertStatus)
+
+    return render_template('changepass.html', title='Change Password', form1=form1, form2=form2, User=user.name, alert=alertStatus)
 
 
 @app.route('/index', methods=['GET', 'POST'])
 def index():
     sessionId = session.get('user')
     newUser = session.get('newUser')
-    if newUser:
-        alert = 1
-        session['newUser'] = False
-    else:
-        alert = 0
 
     user = User.query.filter_by(id=sessionId).first()
 
@@ -136,7 +145,7 @@ def index():
         session['basket'] = basketArr
         app.logger.warning('%s: added item to basket', user.name)
 
-    return render_template('index.html', title='Homepage', data=data, form=form, images=images, User=user.name, alert=alert)
+    return render_template('index.html', title='Homepage', data=data, form=form, images=images, User=user.name)
 
 
 @app.route('/basket', methods=['GET', 'POST'])

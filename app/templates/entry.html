@@ -7,6 +7,9 @@
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
       <link rel="stylesheet" href="{{ url_for('static', filename='/stylesheets/entrystyles.css') }}">
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+      <script src="{{ url_for('static', filename='/scripts/scripts.js') }}"></script>
+
 
       {% if title %}
           <title>{{ title }}</title>
@@ -39,17 +42,40 @@
                   {{ form1.csrf_token }}
                   <form action="" method="post" name="login">
                       {{ wtf.quick_form(form1) }}
+                      <div>
+                      <a role="button" tabindex="0" class="btn btn-sm btn-alert text-info " data-toggle="popover"
+                                      data-placement="bottom" data-content="A minimal amount
+                                       of essential cookies are used to improve user experience and run the website.
+                                       We will never use cookies for marketing purposes and all information is stored
+                                       locally and securely in your browser">
+                                  Why do i need cookies ? </a>
+                      </div>
+
+<!--                      {{ wtf.form_field(form1.email) }}-->
+<!--                      {{ wtf.form_field(form1.password) }}-->
+<!--                      {{ wtf.form_field(form1.cookie_consent) }}-->
+<!--                      <div class="row cookies" id="cookieinfo">-->
+<!--                              <a role="button" tabindex="0" class="btn btn-sm btn-alert text-info" data-toggle="popover"-->
+<!--                                      data-placement="bottom" data-content="A minimal amount-->
+<!--                                       of essential cookies are used to improve user experience and run the website.-->
+<!--                                       We will never use cookies for marketing purposes and all information is stored-->
+<!--                                       locally and securely in your browser">-->
+<!--                                  Why do i need cookies ? </a>-->
+<!--                      </div>-->
+<!--                      <div class="text-center">-->
+<!--                         {{ wtf.form_field(form1.submit) }}-->
+<!--                      </div>-->
                   </form>
               </div>
               {% endif %}
             </div>
             <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-              <!-- show singup form -->
+              <!-- show sing up form -->
               {% if form2 %}
               <div id="form2">
                   {{ form2.csrf_token }}
                   <form action="" method="post" name="signup">
-                      {{ wtf.quick_form(form2) }}
+                        {{ wtf.quick_form(form2) }}
                   </form>
               </div>
               {% endif %}

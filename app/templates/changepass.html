@@ -6,7 +6,7 @@
 
 
 <div class="container-fluid jumbotron">
-    <h1 class="display-4"> Change your password </h1>
+    <h1 class="display-4"> Change your details </h1>
     <hr class="my-4">
     <div id="div_to_hide">
         {% if( alert == 0) %}
@@ -19,15 +19,37 @@
             Password successfully updated
             <button type="button" class="close"> <span >&times;</span> </button>
         </div>
+        {% elif( alert == 2) %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            Name successfully updated
+            <button type="button" class="close"> <span >&times;</span> </button>
+        </div>
+        {% elif( alert == 3) %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            Name is incorrect - Not updated!
+            <button type="button" class="close"> <span >&times;</span> </button>
+        </div>
         {% endif %}
     </div>
     <div id="form">
       <form action="" method="post" name="changepass">
-          {{ form.csrf_token }}
-          {{ wtf.form_field(form.oldpassword) }}
-          {{ wtf.form_field(form.password) }}
-          {{ wtf.form_field(form.passwordCheck) }}
-          <button type="button" class="btn btn-outline-primary"> {{ wtf.form_field(form.submit) }} </button>
+          {{ form1.csrf_token }}
+          {{ wtf.form_field(form1.oldpassword) }}
+          {{ wtf.form_field(form1.password) }}
+          {{ wtf.form_field(form1.passwordCheck) }}
+          <button type="button" class="btn btn-outline-primary"> {{ wtf.form_field(form1.submit) }} </button>
+      </form>
+    </div>
+    <br>
+    <hr class="my-4">
+    <br>
+    <div id="form1">
+      <form action="" method="post" name="changename">
+          {{ form2.csrf_token }}
+          {{ wtf.form_field(form2.oldname) }}
+          {{ wtf.form_field(form2.newname) }}
+          {{ wtf.form_field(form2.namecheck) }}
+          <button type="button" class="btn btn-outline-primary"> {{ wtf.form_field(form2.submit) }} </button>
       </form>
     </div>
 

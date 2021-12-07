@@ -1,11 +1,9 @@
-function showOrder(x) {
-  console.log(x)
-  var order = document.getElementById(x);
-  console.log(order)
-  order.classList.remove("starthidden");
-}
-
 $(document).ready(function() {
+
+    function showOrder(x) {
+        var order = document.getElementById(x);
+        order.classList.remove("starthidden");
+    };
 
     $('.close').click(function () {
         $(".alert").fadeOut("slow");
@@ -29,5 +27,8 @@ $(document).ready(function() {
       speechSynthesis.speak(msg);
     });
 
+    $('[data-toggle="popover"]').popover({
+        trigger: 'focus'
+    });
 
 });
