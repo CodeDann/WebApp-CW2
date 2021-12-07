@@ -21,7 +21,7 @@
         <img class="card-img-top" src="{{images[loop.index-1]}}"  alt="Card image">
       <div class="card-body">
         <h4 class="card-title text-center">{{ item.title }}</h4>
-        <p class="card-text">{{ item.description }}</p>
+        <p class="card-text" id="remove">{{ item.description }}</p>
         <p class="card-text">Price: {{ item.price }} </p>
         <div class="text-center">
         {% if( item.available == 1) %}
