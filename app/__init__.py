@@ -6,9 +6,10 @@ from flask_admin import Admin
 import logging
 
 
-app = Flask(__name__)
+app = Flask(__name__, instance_relative_config=True)
 Bootstrap(app)
-app.config.from_object('config')
+app.config.from_pyfile('config.py')
+# app.config.from_object('config')
 db = SQLAlchemy(app)
 admin = Admin(app, template_mode='bootstrap3')
 # remove any unwanted handlers
