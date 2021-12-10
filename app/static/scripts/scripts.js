@@ -1,9 +1,5 @@
 $(document).ready(function() {
 
-    function showOrder(x) {
-        var order = document.getElementById(x);
-        order.classList.remove("starthidden");
-    };
 
     $('.close').click(function () {
         $(".alert").fadeOut("slow");
@@ -32,3 +28,8 @@ $(document).ready(function() {
     });
 
 });
+
+function showOrder(x) {
+    var order = document.getElementById(x);
+    order.classList.remove("starthidden");
+};
