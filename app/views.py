@@ -97,7 +97,7 @@ def change():
             app.logger.error('%s: successful password update', user.name)
             alertStatus = 0
 
-        return render_template('changepass.html', title='Change Password', form=form1, form2=form2, User=user.name, alert=alertStatus)
+        return render_template('changepass.html', title='Change Password', form1=form1, form2=form2, User=user.name, alert=alertStatus)
 
     elif form2.validate_on_submit():
         given_oldname = form2.oldname.data
