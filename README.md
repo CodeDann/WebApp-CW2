@@ -6,7 +6,7 @@ It utilises login and signup incorpirating secuirity mesures (hashed passwords /
 ##What it looks like
 
 HOMEPAGE
-![Homepage](https://github.com/CodeDann/CoffeeShop-WebApp/blob/main/README-images/homepage.jpg?raw=true)
+![Homepage](https://github.com/CodeDann/WebApp-CW2/blob/main/README-images/homepage.jpg?raw=true)
 
 BASKET
 ![Homepage](https://github.com/CodeDann/CoffeeShop-WebApp/blob/main/README-images/basket.jpg?raw=true)
