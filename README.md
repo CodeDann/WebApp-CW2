@@ -6,12 +6,12 @@ It utilises login and signup incorpirating secuirity mesures (hashed passwords /
 ##What it looks like
 
 HOMEPAGE
-![Homepage](https://github.com/CodeDann/WebApp-CW2/tree/main/README-images/homepage.jpg?raw=true)
+![Homepage](https://github.com/CodeDann/WebApp-CW2/tree/main/README-images/homepage.png?raw=true)
 
 BASKET
-![Homepage](https://github.com/CodeDann/CoffeeShop-WebApp/blob/main/README-images/basket.jpg?raw=true)
+![Homepage](https://github.com/CodeDann/CoffeeShop-WebApp/blob/main/README-images/basket.png?raw=true)
 
 ORDERS
-![Homepage](https://github.com/CodeDann/CoffeeShop-WebApp/blob/main/README-images/orders.jpg?raw=true)
+![Homepage](https://github.com/CodeDann/CoffeeShop-WebApp/blob/main/README-images/orders.png?raw=true)
 
 It is hosted online (but only tempoarily under a free trial so message me for details)
