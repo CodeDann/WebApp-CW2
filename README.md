@@ -5,6 +5,9 @@ It utilises login and signup incorpirating secuirity mesures (hashed passwords /
 
 #What it looks like
 
+LOGIN
+![Homepage](https://github.com/CodeDann/WebApp-CW2/blob/main/README-images/login.png?raw=true)
+
 HOMEPAGE
 ![Homepage](https://github.com/CodeDann/WebApp-CW2/blob/main/README-images/homepage.png?raw=true)
 
