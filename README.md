@@ -6,6 +6,8 @@ It utilises login and signup incorpirating secuirity mesures (hashed passwords /
 ##What it looks like
 
 HOMEPAGE
+![alt text](https://github.com/[username]/[reponame]/blob/[branch]/image.jpg?raw=true)
+
 
 BASKET
 
